@@ -28,6 +28,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
+gem 'bootstrap3-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
