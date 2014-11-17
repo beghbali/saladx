@@ -1,0 +1,2 @@
+class SaladsController < ApplicationController
+end
