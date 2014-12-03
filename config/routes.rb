@@ -57,6 +57,14 @@ Saladx::Application.routes.draw do
   #     resources :products
   #   end
 
+  namespace :cooks do
+    resources :orders do
+      member do
+        patch 'complete'
+      end
+    end
+  end
+
   resources :orders
 
   root to: 'salads#new'
