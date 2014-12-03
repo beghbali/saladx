@@ -1,0 +1,15 @@
+doctype
+html
+  head
+    title Saladx
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+  body id=action_name class=controller_name
+    nav.navbar.navbar-default role='navigation'
+      .container-fluid
+        .navbar-header
+          a.navbar-brand.navbar-right href='#' Saladx
+    .container-fuild
+      = yield

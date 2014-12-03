@@ -56,5 +56,8 @@ Saladx::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :orders
+
   root to: 'salads#new'
 end

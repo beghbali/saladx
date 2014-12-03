@@ -1,3 +1,12 @@
-= semantic_form_for :order do |o|
-  = o.semantic_fields_for :recipe do |r|
+.col-md-8
+  = semantic_form_for :order do |o|
+    = o.semantic_fields_for :recipe do |r|
+      = r.inputs do
+        - Ingredient.categories.each do |category|
+          = render 'ingredients/ingredients', r: r, ingredients: Ingredient.send(category.pluralize).available, category: category
 
+.col-md-4
+  p Nutrition Facts
+  p $12.00
+  p Payment
+  btn.btn-success Order

@@ -1,0 +1,21 @@
+doctype
+html
+  head
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    title Saladx
+    = stylesheet_link_tag    "consumer", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "consumer", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+  body id=action_name class=controller_name
+    nav.navbar.navbar-default role='navigation'
+      .container-fluid
+        .navbar-header
+          a.navbar-brand href='#' Saladx
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            - Ingredient.categories.each do |category|
+              li.category style="border-bottom-color: ##{hexcolor(category)}"
+                a href="##{category}"= category
+    .container-fuild
+      = yield

@@ -1,0 +1,14 @@
+/*
+ *= require_self
+ *= require bootstrap
+ *= require bootstrap_extras
+ *= require_tree ./flat-dream
+ *= require_tree ./../javascripts/flat-dream/jquery.icheck
+ *= require orders
+ */
+
+.navbar {
+  li.category {
+    border-bottom: 1em solid;
+  }
+}
