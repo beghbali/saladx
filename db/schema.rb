@@ -208,9 +208,10 @@ ActiveRecord::Schema.define(version: 20141203113051) do
   add_index "nutr_def", ["Num_Dec"], name: "Num_Dec_Index", using: :btree
 
   create_table "nutrients", force: true do |t|
+    t.string   "name"
     t.integer  "Nutr_No"
     t.integer  "importance"
-    t.float    "dv"
+    t.string   "dv"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

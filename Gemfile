@@ -35,6 +35,7 @@ gem 'slim'
 gem 'active_nutrition', git: 'git@github.com:beghbali/active_nutrition.git'
 gem 'protected_attributes'
 gem 'mysql2'
+gem 'ruby-units'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

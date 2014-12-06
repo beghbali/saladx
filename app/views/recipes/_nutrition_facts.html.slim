@@ -1,17 +1,24 @@
-.nutrition-facts data-available-nutritions=Ingredient.available.map(&:to_nutrition).map(&:to_json)
+.nutrition-facts data-available-nutritions=Ingredient.available.map(&:to_important_nutrition).reduce(&:merge).to_json
   h3 Nutrition Facts
   h5 Serving Size 1 saladx
 
-  ul
-    - Nutrient.by_importance.each do |nutrient|
-      li
-        .col-md-7 = nutrient.name
-        .col-md-1.amount
-        .col-md-2.ptotal
-        .col-md-2.pdv
 
-  .ingredients
+  ul.row-fluid.list-group
+    li.col-md-12.list-group-item
+      .col-md-6
+      .col-md-3 Amount
+      .col-md-3
+        |% Daily Value
+        sup *
+    - Nutrient.important.by_importance.each do |nutrient|
+      li.col-md-12.list-group-item
+        .col-md-6 = nutrient.name
+        .col-md-3.amount data-units=nutrient.units =  "0 #{nutrient.units}"
+        .col-md-3.pdv =
+
+  .row-fluid.clearfix
     h5 Ingredients:
+    ul.ingredients.list-inline
 
   small * Percent Daily Values are based on a 2000 calorie diet.
 

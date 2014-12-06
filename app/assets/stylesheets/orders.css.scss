@@ -9,4 +9,13 @@
   .choose-ingredients .choice input {
     margin-right: 1em;
   }
+
+  .nutrition-facts {
+    ul .list-group-item {
+      padding: 0.25 0.5em;
+    }
+    ul.ingredients {
+      list-style: none;
+    }
+  }
 }
