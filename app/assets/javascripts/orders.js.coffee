@@ -2,6 +2,57 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+##Delivery address/google map
+browserSupportFlag =  new Boolean();
+initialLocation = null;
+sf_soma = new google.maps.LatLng(37.7808157, -122.4024182);
+
+renderGmap = ->
+  mapOptions = {
+    center: sf_soma,
+    zoom: 14
+  };
+  map = new google.maps.Map(document.getElementById('delivery-address-map'), mapOptions);
+  return map
+
+drawCurrentLocation = (map, location)->
+  geocoder = new google.maps.Geocoder();
+  geocoder.geocode {'latLng': location}, (results, status)->
+    if (status == google.maps.GeocoderStatus.OK)
+      if (results[1])
+        map.setZoom(15)
+        marker = new google.maps.Marker
+          position: location,
+          map: map
+        $('[data-user-address]').first().val(results[1].formatted_address)
+
+initializeGmap = ->
+  if(navigator.geolocation)
+      browserSupportFlag = true;
+      navigator.geolocation.getCurrentPosition((position)->
+        initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
+        map = renderGmap()
+        map.setCenter(initialLocation);
+        drawCurrentLocation(map, initialLocation)
+      , ->
+        handleNoGeolocation(browserSupportFlag)
+      );
+
+  #Browser doesn't support Geolocation
+  else
+    browserSupportFlag = false
+    handleNoGeolocation(browserSupportFlag)
+
+
+handleNoGeolocation = (errorFlag)->
+  initialLocation = sf_soma
+  map = renderGmap()
+  map.setCenter(initialLocation)
+
+google.maps.event.addDomListener(window, 'load', initializeGmap)
+
+
+##Nutrition Table
 updateNutrientPdv = (existing_nutrient, nutrient_data, operator)->
   pdv = $(existing_nutrient).find('.pdv')
   existing_pdv = parseInt(pdv.text()) || 0

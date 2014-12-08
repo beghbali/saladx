@@ -36,6 +36,10 @@ gem 'active_nutrition', git: 'git@github.com:beghbali/active_nutrition.git'
 gem 'protected_attributes'
 gem 'mysql2'
 gem 'ruby-units'
+gem "font-awesome-rails"
+gem 'momentjs-rails', '>= 2.8.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
+gem 'obfuscate_id', git: 'git@github.com:namick/obfuscate_id.git'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

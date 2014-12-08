@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203113051) do
+ActiveRecord::Schema.define(version: 20141208071149) do
 
   create_table "abbrev", primary_key: "NDB_No", force: true do |t|
     t.string  "Shrt_Desc",   limit: 60
@@ -234,6 +234,7 @@ ActiveRecord::Schema.define(version: 20141203113051) do
     t.integer  "courier_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "started_at"
   end
 
   create_table "recipe_ingredients", force: true do |t|

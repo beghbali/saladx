@@ -1,15 +1,33 @@
 class Cooks::OrdersController < ApplicationController
+  respond_to :json
+  skip_before_filter :verify_authenticity_token, only: [:next, :show, :complete]
+  before_filter :load_resource, only: [:show, :complete]
+  before_filter :load_cook, only: [:next, :show, :complete]
+
+  def next
+    @order = Order.unfulfilled.first
+    @order.try(:started_by!, @cook)
+    respond_with @order
+  end
 
   def index
-    #VIN: you need to get the next unfulfilled order and redirect to show (to show that order)
+    @orders = Order.unfulfilled
   end
 
   def show
-    #VIN:  you get the order and the view will use it to render the appropriate data in the slim template
+    respond_with @order
   end
 
   def complete
-    #VIN: will find and mark the order as complete and redirect to index
+    @order.fulfilled_by!(@cook)
   end
 
+  private
+  def load_resource
+    @order = Order.find(params[:id])
+  end
+
+  def load_cook
+    @cook = User.find(params[:cook_id])
+  end
 end

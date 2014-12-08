@@ -18,4 +18,23 @@
       list-style: none;
     }
   }
+  .payment {
+    padding: 1em 0;
+
+    h1 {
+      margin-bottom: 0.5em;
+    }
+  }
+  .card {
+    .input-group {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
+
+  #delivery-address-map {
+    height: 12em;
+    margin: 0;
+    padding: 0;
+  }
 }

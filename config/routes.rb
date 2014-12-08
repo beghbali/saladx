@@ -57,8 +57,11 @@ Saladx::Application.routes.draw do
   #     resources :products
   #   end
 
-  namespace :cooks do
-    resources :orders do
+  resources :users, path: 'cooks', as: 'cooks' do
+    resources :orders, controller: 'cooks/orders', defaults: { format: :json } do
+      collection do
+        get 'next'
+      end
       member do
         patch 'complete'
       end

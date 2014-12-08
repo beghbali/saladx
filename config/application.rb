@@ -19,5 +19,6 @@ module Saladx
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.google_maps_api_key = ENV['GOOGLE_MAPS_API_KEY']
   end
 end

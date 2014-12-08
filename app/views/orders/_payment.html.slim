@@ -1,0 +1,23 @@
+.payment
+  = o.input :stripe_card_token, as: :hidden
+  h3 = "Price: $#{Order::PRICE/100.0}"
+  .card.border-radius
+    .row
+      .col-md-6
+        .input-group.form-group
+          span.input-group-addon aria-hidden="true"
+            span.glyphicon.glyphicon-credit-card
+          = text_field_tag :card_number, nil,  placeholder: 'credit card number', class: 'form-control'
+          = text_field_tag :cvv, nil, placeholder: 'cvv (3-4 digits)', class: 'form-control'
+      .col-md-6
+        .input-group.form-group.date.datetime data-start-view="4" data-date="2014-09-16T05:25:07Z" data-date-format="MM" data-link-field="dtp_input1"
+          input.form-control type='text' placeholder='month (expiration)'
+          .input-group-addon.btn.btn-info
+            span.glyphicon.glyphicon-th
+        .input-group.form-group.date.datetime data-start-view="3" data-date="2014-09-16T05:25:07Z" data-date-format="yyyy" data-link-field="dtp_input1"
+          input.form-control type='text' placeholder='year (expiration)'
+          .input-group-addon.btn.btn-info
+            span.glyphicon.glyphicon-th
+    .row.clearfix
+      .col-md-12.form-group
+        button.btn.btn-lg.btn-block.btn-success Order
