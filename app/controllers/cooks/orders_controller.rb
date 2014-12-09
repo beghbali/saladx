@@ -28,6 +28,6 @@ class Cooks::OrdersController < ApplicationController
   end
 
   def load_cook
-    @cook = User.find(params[:cook_id])
+    @cook = User.find(params[:cook_id]) rescue nil
   end
 end

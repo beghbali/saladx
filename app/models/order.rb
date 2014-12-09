@@ -8,6 +8,8 @@ class Order < ActiveRecord::Base
 
   scope :unfulfilled, -> { where(fulfilled_at: nil) }
 
+  before_save :charge
+
   alias_method :fulfilled_by, :cook
   alias_method :pickedup_by, :courier
   alias_method :delivered_by, :courier
@@ -29,6 +31,19 @@ class Order < ActiveRecord::Base
   def as_json(options=nil)
     attributes.with_indifferent_access.slice(:recipe_id, :customer_id, :street_address, :city, :state, :zip_code,
       :started_at, :ordered_at, :cook_id, :pickedup_at, :courier_id)
+  end
+
+  def charge
+    charge = Stripe::Charge.create(
+        :amount => Order::PRICE,
+        :currency => "usd",
+        :customer => customer.stripe_customer_id
+      )
+    self.stripe_charge_id = charge.id if charge.paid
+  end
+
+  def payed?
+    self.stripe_charge_id.present?
   end
 
   private

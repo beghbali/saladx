@@ -1,6 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+#= require stripe
 
 ##Delivery address/google map
 browserSupportFlag =  new Boolean();
@@ -10,7 +11,8 @@ sf_soma = new google.maps.LatLng(37.7808157, -122.4024182);
 renderGmap = ->
   mapOptions = {
     center: sf_soma,
-    zoom: 14
+    zoom: 14,
+    mapTypeIds: [google.maps.MapTypeId.ROADMAP]
   };
   map = new google.maps.Map(document.getElementById('delivery-address-map'), mapOptions);
   return map
@@ -92,6 +94,7 @@ addIngredient = (chosen_ingredient, nutrition_number)->
   addNutrientsFor(chosen_ingredient, nutrition_number)
 
 $ ->
+
   $('.order input[type=checkbox]').on 'change', ->
     chosen_ingredient = $(@).parent().text()
     nutrition_number = $(@).val()
