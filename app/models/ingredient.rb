@@ -1,6 +1,4 @@
 class Ingredient < ActiveRecord::Base
-  attr_protected
-
   scope :greens, -> { where(category: 'greens') }
   scope :vegetables, -> { where(category: 'vegetables') }
   scope :proteins, -> { where(category: 'protein') }

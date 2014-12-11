@@ -74,6 +74,12 @@ GEM
     arel (4.0.2)
     awesome_print (1.2.0)
     bcrypt (3.1.9)
+    better_errors (2.0.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bootstrap3-datetimepicker-rails (3.1.3)
       momentjs-rails (>= 2.8.1)
     bootstrap3-rails (3.2.0)
@@ -86,6 +92,7 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
+    coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -96,6 +103,7 @@ GEM
     columnize (0.8.9)
     composite_primary_keys (6.0.7)
       activerecord (~> 4.0.6)
+    debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -113,6 +121,11 @@ GEM
     formtastic-bootstrap (3.0.0)
       formtastic (>= 2.2)
     formtastic_i18n (0.1.1)
+    geokit (1.9.0)
+      multi_json (>= 1.3.2)
+    geokit-rails (2.0.1)
+      geokit (~> 1.5)
+      rails (>= 3.0)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -149,8 +162,6 @@ GEM
     polyamorous (1.1.0)
       activerecord (>= 3.0)
     polyglot (0.3.5)
-    protected_attributes (1.0.8)
-      activemodel (>= 4.0.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -230,6 +241,8 @@ DEPENDENCIES
   active_nutrition!
   activeadmin!
   awesome_print
+  better_errors
+  binding_of_caller
   bootstrap3-datetimepicker-rails (~> 3.1.3)
   bootstrap3-rails
   byebug
@@ -238,12 +251,12 @@ DEPENDENCIES
   font-awesome-rails
   formtastic (~> 3.0)
   formtastic-bootstrap
+  geokit-rails
   jbuilder (~> 1.2)
   jquery-rails
   momentjs-rails (>= 2.8.1)
   mysql2
   obfuscate_id!
-  protected_attributes
   rails (= 4.0.6)
   ruby-units
   sass-rails (~> 4.0.0)

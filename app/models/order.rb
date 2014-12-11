@@ -1,13 +1,21 @@
 class Order < ActiveRecord::Base
   obfuscate_id
 
+  acts_as_mappable :default_units => :miles,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :latitude,
+                   :lng_column_name => :longitude
   belongs_to :recipe
   belongs_to :customer, class_name: 'User', foreign_key: :customer_id
   belongs_to :cook, class_name: 'User', foreign_key: :cook_id
   belongs_to :courier, class_name: 'User', foreign_key: :courier_id
 
+  accepts_nested_attributes_for :recipe
+
   scope :unfulfilled, -> { where(fulfilled_at: nil) }
 
+  before_validation :set_zone
   before_save :charge
 
   alias_method :fulfilled_by, :cook
@@ -44,6 +52,16 @@ class Order < ActiveRecord::Base
 
   def payed?
     self.stripe_charge_id.present?
+  end
+
+  def set_zone
+    self.zone = determine_zone
+  end
+
+  def determine_zone
+    possible_zones = Zone.within(1, self)
+    #create geokit::polygon from the serialized zone boundaries and find the right zone or pick the closest one
+    # possible_zones.detect {|zone| zone.}
   end
 
   private

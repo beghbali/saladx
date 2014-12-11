@@ -5,6 +5,9 @@
       span.input-group-addon
         = fa_icon 'truck'
       = text_field_tag :delivery_address, 'Where should we deliver to?', class: 'form-control', 'data-user-address' => '#'
+      = o.input :delivery_instructions
+      = o.input :name
+      = o.input :phone_number
       = o.input :street_address, as: :hidden
       = o.input :city, as: :hidden
       = o.input :state, as: :hidden

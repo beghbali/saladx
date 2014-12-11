@@ -4,6 +4,7 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1"
     title Saladx
     script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=#{Saladx::Application.config.google_maps_api_key}"
+    script type="text/javascript" src="https://js.stripe.com/v2/"
     = stylesheet_link_tag    "consumer", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "consumer", "data-turbolinks-track" => true
     = csrf_meta_tags

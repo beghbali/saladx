@@ -1,5 +1,3 @@
-Stripe.setPublishableKey $("[data-stripe-publishable-key]").data('stripe-publishable-key')
-
 addInputNames = ->
   $(".card-number").attr "name", "card-number"
   $(".card-cvc").attr "name", "card-cvc"
@@ -19,7 +17,7 @@ submit = (form) ->
   removeInputNames()
 
   # given a valid form, submit the payment details to stripe
-  $(form["submit-button"]).attr "disabled", "disabled"
+  $(form).find('button[type=submit]').attr "disabled", "disabled"
   Stripe.createToken
     number: $(".card-number").val()
     cvc: $(".card-cvc").val()
@@ -29,7 +27,7 @@ submit = (form) ->
     if response.error
 
       # re-enable the submit button
-      $(form["submit-button"]).removeAttr "disabled"
+      $(form).find('button[type=submit]').removeAttr "disabled"
 
       # show the error
       $(".payment-errors").html response.error.message
@@ -50,27 +48,10 @@ submit = (form) ->
   false
 
 $ ->
-  # add custom rules for credit card validating
-  jQuery.validator.addMethod "cardNumber", Stripe.validateCardNumber, "Please enter a valid card number"
-  jQuery.validator.addMethod "cardCVC", Stripe.validateCVC, "Please enter a valid security code"
-  jQuery.validator.addMethod "cardExpiry", (->
-    Stripe.validateExpiry $(".card-expiry-month").val(), $(".card-expiry-year").val()
-  ), "Please enter a valid expiration"
-
-  # We use the jQuery validate plugin to validate required params on submit
-  $(".payment").closest('form').validate
-    submitHandler: submit
-    rules:
-      "card-cvc":
-        cardCVC: true
-        required: true
-
-      "card-number":
-        cardNumber: true
-        required: true
-
-      "card-expiry-year": "cardExpiry" # we don't validate month separately
-
+  Stripe.setPublishableKey $("[data-stripe-publishable-key]").data('stripe-publishable-key')
+  $(".payment").closest('form').on 'submit', (e)->
+    e.preventDefault()
+    submit(@)
 
   # adding the input field names is the last step, in case an earlier step errors
   addInputNames()

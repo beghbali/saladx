@@ -1,7 +1,6 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-#= require stripe
 
 ##Delivery address/google map
 browserSupportFlag =  new Boolean();
@@ -26,6 +25,7 @@ drawCurrentLocation = (map, location)->
         marker = new google.maps.Marker
           position: location,
           map: map
+        console.log(results[1])
         $('[data-user-address]').first().val(results[1].formatted_address)
 
 initializeGmap = ->

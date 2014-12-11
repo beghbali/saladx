@@ -1,5 +1,4 @@
 class Nutrient < ActiveRecord::Base
-  attr_protected
   attr_accessor :amount
 
   IMPORTANCE_LOWER_BOUND = 3

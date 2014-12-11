@@ -2,12 +2,12 @@ class User < ActiveRecord::Base
   obfuscate_id
 
   attr_accessor :stripe_card_token
-  attr_accessible :email, :password
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :orders
   before_save :create_stripe_customer, unless: :stripe_customer_id
 
   def create_stripe_customer
@@ -18,4 +18,11 @@ class User < ActiveRecord::Base
     self.stripe_customer_id = customer.id
   end
 
+  def email_required?
+    false
+  end
+
+  def password_required?
+    false
+  end
 end

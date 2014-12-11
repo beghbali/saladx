@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209082158) do
+ActiveRecord::Schema.define(version: 20141211065938) do
 
   create_table "abbrev", primary_key: "NDB_No", force: true do |t|
     t.string  "Shrt_Desc",   limit: 60
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 20141209082158) do
     t.integer  "customer_id"
     t.string   "street_address"
     t.string   "city"
-    t.string   "state",            default: "CA"
+    t.string   "state",                 default: "CA"
     t.string   "zip_code"
     t.float    "latitude"
     t.float    "longitude"
@@ -236,6 +236,9 @@ ActiveRecord::Schema.define(version: 20141209082158) do
     t.datetime "updated_at"
     t.datetime "started_at"
     t.string   "phone_number"
+    t.string   "full_name"
+    t.string   "zone"
+    t.text     "delivery_instructions"
   end
 
   create_table "recipe_ingredients", force: true do |t|
@@ -257,8 +260,8 @@ ActiveRecord::Schema.define(version: 20141209082158) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: ""
+    t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -270,6 +273,8 @@ ActiveRecord::Schema.define(version: 20141209082158) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "stripe_customer_id"
+    t.string   "phone_number"
+    t.string   "full_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -287,5 +292,16 @@ ActiveRecord::Schema.define(version: 20141209082158) do
 
   add_index "weight", ["NDB_No", "Seq"], name: "Weight_NDB_No_Seq_Index", unique: true, using: :btree
   add_index "weight", ["Num_Data_Pts"], name: "Weight_Num_Data_Pts_Index", using: :btree
+
+  create_table "zones", force: true do |t|
+    t.text     "boundaries"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "city"
+    t.string   "neighborhood"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -1,4 +1,8 @@
 class Recipe < ActiveRecord::Base
-  has_many :ingredient, through: :recipe_ingredients
-  has_one :salad
+  has_many :recipe_ingredients
+  has_many :ingredients, through: :recipe_ingredients
+  has_many :orders
+
+  accepts_nested_attributes_for :recipe_ingredients
+
 end
