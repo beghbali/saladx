@@ -4,10 +4,10 @@
     .input-group.margin-bottom-sm
       span.input-group-addon
         = fa_icon 'truck'
+      = text_field :order, :full_name, placeholder: 'Your name', class: 'form-control'
+      = text_field :order,  :phone_number, placeholder: 'Phone number for your delivery', class: 'form-control'
       = text_field_tag :delivery_address, 'Where should we deliver to?', class: 'form-control', 'data-user-address' => '#'
-      = o.input :delivery_instructions
-      = o.input :name
-      = o.input :phone_number
+      = text_area :order, :delivery_instructions, rows: 1, cols: 30, placeholder: 'any special delivery instruction?', class: 'form-control'
       = o.input :street_address, as: :hidden
       = o.input :city, as: :hidden
       = o.input :state, as: :hidden
