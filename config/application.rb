@@ -20,5 +20,6 @@ module Saladx
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.google_maps_api_key = ENV['GOOGLE_MAPS_API_KEY']
+    config.customer_support_phone_number = '(408)761-0628'
   end
 end

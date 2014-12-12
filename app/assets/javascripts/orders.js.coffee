@@ -16,6 +16,18 @@ renderGmap = ->
   map = new google.maps.Map(document.getElementById('delivery-address-map'), mapOptions);
   return map
 
+
+fill_in_address_field = (component)->
+  switch component.types[0]
+    when 'street_number' then $('#order_street_address').val(component.long_name + ' ' + $('#order_street_address').val())
+    when 'route' then $('#order_street_address').val($('#order_street_address').val() + component.long_name)
+    when 'locality' then $('#order_city').val(component.long_name)
+    when 'administrative_area_level_1' then $('#order_state').val(component.long_name)
+    when 'postal_code' then $('#order_zip_code').val(component.long_name)
+
+fill_in_address_fields = (geocode)->
+  fill_in_address_field(component) for component in geocode.address_components
+
 drawCurrentLocation = (map, location)->
   geocoder = new google.maps.Geocoder();
   geocoder.geocode {'latLng': location}, (results, status)->
@@ -25,8 +37,8 @@ drawCurrentLocation = (map, location)->
         marker = new google.maps.Marker
           position: location,
           map: map
-        console.log(results[1])
-        $('[data-user-address]').first().val(results[1].formatted_address)
+        $('[data-user-address]').first().val(results[0].formatted_address)
+        fill_in_address_fields(results[0])
 
 initializeGmap = ->
   if(navigator.geolocation)

@@ -13,11 +13,12 @@ html
     nav.navbar.navbar-default role='navigation'
       .container-fluid
         .navbar-header
-          a.navbar-brand href='#' Saladx
+          a.navbar-brand href=new_order_url Saladx
         .collapse.navbar-collapse
           ul.nav.navbar-nav
             - Ingredient.categories.each do |category|
               li.category style="border-bottom-color: ##{hexcolor(category)}"
                 a href="##{category}"= category
     .container-fuild
+      = render 'layouts/messages'
       = yield

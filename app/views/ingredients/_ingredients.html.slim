@@ -2,7 +2,7 @@
   h4 = t("categories.#{category}.title")
   - ingredients.each_slice(5) do |column_ingredients|
     .col-md-6
-      = r.input :ingredients, as: :check_boxes, collection: column_ingredients, label_method: :name, label: false, required: false, wrapper_html: { class: 'choose-ingredients' }, hidden_fields: false, value_as_class: true
+      = r.input :ingredient_ids, as: :check_boxes, collection: column_ingredients, label_method: :name, label: false, required: false, wrapper_html: { class: 'choose-ingredients' }, hidden_fields: false, value_as_class: true
       / ins.iCheck-helper
 
       / label class="icheckbox_flat-green checked"

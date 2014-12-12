@@ -6,12 +6,10 @@ class Order < ActiveRecord::Base
                    :distance_field_name => :distance,
                    :lat_column_name => :latitude,
                    :lng_column_name => :longitude
-  belongs_to :recipe
+  belongs_to :recipe, autosave: true
   belongs_to :customer, class_name: 'User', foreign_key: :customer_id
   belongs_to :cook, class_name: 'User', foreign_key: :cook_id
   belongs_to :courier, class_name: 'User', foreign_key: :courier_id
-
-  accepts_nested_attributes_for :recipe
 
   scope :unfulfilled, -> { where(fulfilled_at: nil) }
 
@@ -59,9 +57,8 @@ class Order < ActiveRecord::Base
   end
 
   def determine_zone
-    possible_zones = Zone.within(1, self)
-    #create geokit::polygon from the serialized zone boundaries and find the right zone or pick the closest one
-    # possible_zones.detect {|zone| zone.}
+    possible_zones = Zone.within(1, origin: self)
+    possible_zones.detect {|zone| zone.boundary.contains? self }
   end
 
   private

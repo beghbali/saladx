@@ -1,0 +1,6 @@
+.bs-callout.bs-callout-success
+  h4 Your Saladx is being prepared
+  p Please allow 20mins or so for your freshly made organic salad to arrive
+  p
+    |If you have any questions, please contact customer support at:
+    = link_to Saladx::Application.config.customer_support_phone_number, "tel:#{Saladx::Application.config.customer_support_phone_number}"

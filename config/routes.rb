@@ -68,7 +68,11 @@ Saladx::Application.routes.draw do
     end
   end
 
-  resources :orders
+  resources :orders do
+    member do
+      get 'thank_you'
+    end
+  end
 
   root to: 'salads#new'
 end
