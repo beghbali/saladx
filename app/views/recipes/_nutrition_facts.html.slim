@@ -4,17 +4,17 @@
 
 
   ul.row-fluid.list-group
-    li.col-md-12.list-group-item
-      .col-md-6
-      .col-md-3 Amount
-      .col-md-3
+    li.col-md-12.col-xs-12.list-group-item
+      .col-md-6.col-xs-8
+      .col-md-3.hidden-xs Amount
+      .col-md-3.col-xs-4
         |% Daily Value
         sup *
     - Nutrient.important.by_importance.each do |nutrient|
-      li.col-md-12.list-group-item
-        .col-md-6 = nutrient.name
-        .col-md-3.amount data-units=nutrient.units =  "0 #{nutrient.units}"
-        .col-md-3.pdv =
+      li.col-md-12.col-xs-12.list-group-item
+        .col-md-6.col-xs-9 = nutrient.name
+        .col-md-3.amount.hidden-xs data-units=nutrient.units =  "0 #{nutrient.units}"
+        .col-md-3.col-xs-3.pdv =
 
   .row-fluid.clearfix
     h5 Ingredients:

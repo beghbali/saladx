@@ -2,7 +2,7 @@
   = hidden_field_tag :stripe_card_token, nil, class: 'x-stripe-token'
   h3 = "Price: $#{Order::PRICE/100.0}"
   .card.border-radius
-    .row
+    .row-fluid
       .col-md-12.payment-errors
       .col-md-6
         .input-group.form-group
@@ -10,7 +10,10 @@
             span.glyphicon.glyphicon-credit-card
           = text_field_tag :card_number, nil,  placeholder: 'credit card number', class: 'form-control card-number', maxlength: 19
           = text_field_tag :cvv, nil, placeholder: 'cvv (3-4 digits)', class: 'form-control card-cvc', maxlength: 4
-      .col-md-6
+          = select_month(Date.today, { add_month_numbers: true }, { class: 'form-control card-expiry-month visible-xs' })
+          = select_year(Date.today, { start_year: Date.today.year, end_year: 15.years.from_now.year }, { class: 'form-control card-expiry-year visible-xs' })
+
+      .col-md-6.hidden-xs
         .input-group.form-group.col-md-12
           = select_month(Date.today, { add_month_numbers: true }, { class: 'form-control card-expiry-month' })
           = select_year(Date.today, { start_year: Date.today.year, end_year: 15.years.from_now.year }, { class: 'form-control card-expiry-year' })
