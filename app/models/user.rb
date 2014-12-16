@@ -8,9 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :orders
-  if defined?(:stripe_customer_id)
-    before_save :create_stripe_customer, unless: :stripe_customer_id
-  end
+  before_save :create_stripe_customer, unless: :stripe_customer_id
 
   def create_stripe_customer
     customer = Stripe::Customer.create(

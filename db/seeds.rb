@@ -10,6 +10,8 @@ def allow_params(params)
   parameters.permit(*params.keys)
 end
 
+User.create!(email: 'admin@getsaladx.com', password: 'password', password_confirmation: 'password')
+
 Ingredient.delete_all
 
 ['Baby Field Greens', 'Baby Spinach', 'Baby Arugula', 'Kale', 'butter lettuce', 'iceberg lettuce', 'romaine lettuce'].each do |ingredient|
