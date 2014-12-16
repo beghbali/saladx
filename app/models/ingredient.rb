@@ -10,6 +10,10 @@ class Ingredient < ActiveRecord::Base
     uniq.pluck(:category)
   end
 
+  def as_json(options={})
+    name
+  end
+
   def to_nutrition
     to_select_nutrition(:all)
   end
