@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  obfuscate_id
-
   ROLES = %w(consumer cook courier admin)
 
   attr_accessor :stripe_card_token

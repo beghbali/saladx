@@ -1,5 +1,6 @@
 class Cooks::OrdersController < ApplicationController
   respond_to :json
+
   skip_before_filter :verify_authenticity_token, only: [:next, :show, :complete]
   before_filter :load_resource, only: [:show, :complete]
   before_filter :load_cook, only: [:next, :show, :complete]
@@ -20,6 +21,7 @@ class Cooks::OrdersController < ApplicationController
 
   def complete
     @order.fulfilled_by!(@cook)
+    self.next
   end
 
   private

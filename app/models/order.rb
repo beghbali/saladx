@@ -37,8 +37,9 @@ class Order < ActiveRecord::Base
   JSON_ATTRIBUTES = [:recipe_id, :customer_id, :street_address, :city, :state, :zip_code,
       :started_at, :ordered_at, :cook_id, :pickedup_at, :courier_id]
 
+
   def as_json(options=nil)
-    attributes.with_indifferent_access.slice(*JSON_ATTRIBUTES).merge(recipe: recipe.as_json)
+    attributes.with_indifferent_access.slice(*JSON_ATTRIBUTES).merge(recipe: recipe.as_json, id: to_param)
   end
 
   def charge

@@ -63,7 +63,7 @@ Saladx::Application.routes.draw do
         get 'next'
       end
       member do
-        patch 'complete'
+        post 'complete'
       end
     end
   end
