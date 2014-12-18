@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   scope :unfulfilled, -> { where(fulfilled_at: nil) }
 
   before_validation :set_zone
-  before_save :charge
+  before_create :charge
 
   alias_method :fulfilled_by, :cook
   alias_method :pickedup_by, :courier

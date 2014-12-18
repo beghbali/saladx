@@ -57,7 +57,7 @@ Saladx::Application.routes.draw do
   #     resources :products
   #   end
 
-  resources :users, path: 'cooks', as: 'cooks' do
+  resources :users, path: 'cooks', as: 'cooks', controller: 'cooks/cooks' do
     resources :orders, controller: 'cooks/orders', defaults: { format: :json } do
       collection do
         get 'next'
@@ -74,5 +74,5 @@ Saladx::Application.routes.draw do
     end
   end
 
-  root to: 'salads#new'
+  root to: 'orders#new'
 end

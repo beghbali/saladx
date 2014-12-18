@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   obfuscate_id
 
+  ROLES = %w(consumer cook courier admin)
+
   attr_accessor :stripe_card_token
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -8,7 +10,22 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :orders
-  before_save :create_stripe_customer, unless: :stripe_customer_id
+  before_save :create_stripe_customer, if: -> { stripe_customer_id.nil? && consumer? }
+
+  scope :consumers, -> { where(role: 'consumer') }
+  scope :cooks, -> { where(role: 'cook') }
+  scope :couriers, -> { where(role: 'courier') }
+  scope :admins, -> { where(role: 'admin') }
+
+  ROLES.each do |role|
+    define_method "#{role}?" do
+      self.role == role
+    end
+  end
+
+  def as_json(options=nil)
+    attributes.with_indifferent_access.slice(:id, :full_name, :email, :phone_number)
+  end
 
   def create_stripe_customer
     customer = Stripe::Customer.create(

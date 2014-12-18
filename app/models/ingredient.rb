@@ -4,14 +4,21 @@ class Ingredient < ActiveRecord::Base
   scope :proteins, -> { where(category: 'protein') }
   scope :available, -> { where('available_servings > 0') }
 
+  before_create :generate_label
   #need to convert nutrients based on serving_size ratio to whatever the nutrient definition amount is
 
   def self.categories
     uniq.pluck(:category)
   end
 
+  def generate_label
+    last_label = self.class.where(category: category).order(:label).last.try(:label) || "X0"
+    last_label_number = last_label.scan(/\d+/).first.to_i
+    self.label = "#{category.first.upcase}#{last_label_number+1}"
+  end
+
   def as_json(options={})
-    name
+    attributes.with_indifferent_access.slice(:name, :label)
   end
 
   def to_nutrition

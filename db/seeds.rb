@@ -10,7 +10,8 @@ def allow_params(params)
   parameters.permit(*params.keys)
 end
 
-User.create!(email: 'admin@getsaladx.com', password: 'password', password_confirmation: 'password')
+User.where(email: 'admin@getsaladx.com').destroy_all
+User.create!(email: 'admin@getsaladx.com', password: 'password', password_confirmation: 'password', stripe_customer_id: 'not-a-customer')
 
 Ingredient.delete_all
 
